@@ -1,0 +1,115 @@
+//Bottom View of Binary Tree
+class Solution {
+  public:
+    vector <int> bottomView(Node *root) {
+        vector<int> ans;
+        if ( root ==NULL){
+            return ans;
+        }
+        
+        map<int,int> topNode;
+        queue<pair<Node*,int>>q;
+        q.push(make_pair(root,0));
+        
+        while(!q.empty()){
+            
+            pair<Node*,int>temp = q.front();
+            q.pop();
+            Node*front = temp.first;
+            int hd = temp.second;
+            topNode[hd]= front->data;
+            
+            if(front->left){
+                q.push(make_pair(front->left,hd-1));
+                
+            }
+            if(front->right){
+                q.push(make_pair(front->right,hd+1));
+            }
+            
+            
+        }
+        
+        for(auto i : topNode){
+            ans.push_back(i.second);
+        }
+        return ans;
+    }
+};
+//Left View
+void solve(Node* root, vector<int> &ans, int level) {
+    //base case
+    if(root == NULL)
+        return ;
+       
+    //we entered into a new level    
+    if(level == ans.size())
+        ans.push_back(root->data);
+        
+    solve(root->left, ans, level+1);
+    solve(root->right, ans, level+1);
+}
+
+vector<int> leftView(Node *root)
+{
+   vector<int> ans;
+   solve(root, ans, 0);
+   return ans;
+}
+//Right View
+
+class Solution
+{
+    
+    public:
+    //Function to return list containing elements of right view of binary tree.
+    void solve(Node* root, vector<int> &ans, int level) {
+    //base case
+    if(root == NULL)
+        return ;
+       
+    //we entered into a new level    
+    if(level == ans.size())
+        ans.push_back(root->data);
+        
+    solve(root->right, ans, level+1);    
+    solve(root->left, ans, level+1);
+    
+}
+    vector<int> rightView(Node *root)
+    {
+        vector<int> ans;
+        solve(root, ans, 0);
+        return ans;
+    }
+};
+
+//Diagonal Traversal 
+vector<int> diagonal(Node *root)
+{
+   // your code here
+   vector<int>ans;
+   
+   queue<Node*>q;
+   q.push(root);
+   
+   while(!q.empty()){
+       Node*temp = q.front();
+       q.pop();
+       ans.push_back(temp->data);
+       if(temp->left){
+           q.push(temp->left);
+       }
+       while(temp->right!=NULL){
+           temp = temp->right;
+           ans.push_back(temp->data);
+           if(temp->left){
+               q.push(temp->left);
+           }
+       }
+   }
+   return ans;
+   
+   
+}
+
