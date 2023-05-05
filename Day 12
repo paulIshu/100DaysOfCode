@@ -1,0 +1,24 @@
+class Solution{
+  public:
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        struct Node *curr = head;
+        int rev =0;
+        int pow = 1;
+        int num = 0;
+        while(curr!=NULL){
+            num = num*10 + curr->data;
+            curr = curr ->next;
+        }
+        int n1 = num;
+        while(num){
+            int ld = num%10;
+            rev = rev*10+ld;
+            num/=10;
+        }
+        return (n1==rev)?1:0;
+        
+    }
+};
