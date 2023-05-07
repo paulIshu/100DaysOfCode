@@ -1,0 +1,25 @@
+class Solution {
+    public:
+    vector<int>ans;
+    void inorder(Node *root,int k){
+        if(root==NULL){
+            return;
+        }  
+        inorder(root->left,k);
+        ans.push_back(root->data);
+        inorder(root->right,k);
+        
+    }
+  
+    // Return the Kth smallest element in the given BST
+    int KthSmallestElement(Node *root, int K) {
+        // add code here.
+        inorder(root,K);
+   
+        if(K>ans.size())return -1;
+     
+        else{
+         return ans[K-1];
+        }
+    }
+};
