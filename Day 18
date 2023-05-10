@@ -1,0 +1,54 @@
+class Solution
+{
+    
+       //Your code here
+    public:
+    //Function to return a list of integers denoting the node 
+    //values of both the BST in a sorted order.
+    
+    void traverse(Node* root, vector<int> &ans) {
+        if (!root) return;
+        traverse(root -> left, ans);
+        ans.push_back(root -> data);
+        traverse(root -> right, ans);
+    }
+    
+    vector<int> merge(Node *root1, Node *root2)
+    {
+       vector<int>first;
+       vector<int>second;
+       traverse(root1,first);
+       traverse(root2,second);
+       int len1 = first.size();
+       int len2 = second .size();
+       
+       vector <int> curr(len1+len2);
+       int i =0;
+       int j=0;
+       int k =0;
+       
+       while(i<len1&& j<len2){
+           if(first[i]<second[j]){
+               curr[k] = first[i];
+               i++;
+               k++;
+           }
+           else{
+               curr[k] = second[j];
+               j++;
+               k++;
+           }
+       }
+       while(i<len1){
+           curr[k]=first[i];
+           i++;
+           k++;
+       }
+        while(j<len2){
+           curr[k]=second[j];
+           j++;
+           k++;
+       }
+       return curr;
+    }
+};
