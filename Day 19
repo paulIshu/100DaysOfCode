@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+     int res=0;
+   bool isBST(Node *root,int min,int max){
+       if(root==NULL)return true;
+       return((root->data>min && root->data<max) && isBST(root->left,min,root->data) && isBST(root->right,root->data,max));
+   }
+   int getsize(Node *root){
+       if(root==NULL) return 0;
+       return 1+getsize(root->left)+getsize(root->right);
+   }
+    int largestBst(Node *root)
+    {
+        int x=INT_MIN;
+        int y=INT_MAX;
+         if(root){
+            if(isBST(root,x,y)){
+                int size=getsize(root);
+                res=max(res,size);
+            }
+            largestBst(root->left);
+            largestBst(root->right);
+        }
+         
+    return res;    
+    }
+    
+};
