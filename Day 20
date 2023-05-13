@@ -1,0 +1,35 @@
+Node *insuc(Node *root, int val){
+    while(root->left!=NULL){
+        root = root->left;
+    }
+    return root;
+}
+Node *deleteNode(Node *root, int val) {
+    if(root== NULL) return root;
+    if(root->data == val){
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        if(root->left && !root->right){
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        else if(!root->left and root->right)
+        {
+            Node*temp=root->right;
+            delete root;
+            return temp;
+        }
+        else if(root->left && root->right){
+            Node *min = insuc(root->right, val);
+            root->data = min->data;
+            root->right = deleteNode(root->right, min->data);
+            return root;
+        }
+    }
+    else if(root->data>val)  root->left = deleteNode(root->left, val);
+    root->right=deleteNode(root->right,val);
+    return root;
+}
