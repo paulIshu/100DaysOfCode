@@ -1,0 +1,17 @@
+void rearrange(long long *arr, int n) { 
+         vector<long long>v;
+         for(int i=0;i<n;i++)
+         v.push_back(arr[i]);
+         int i=0,k=0;
+         while(i<n/2){
+             arr[k]=v[n-1-i];
+             k++;
+             arr[k]=v[i];
+             k++;
+             i++;
+         }
+         if(n&1){
+             arr[n-1]=v[n/2];
+         }
+        
+    }
