@@ -1,0 +1,25 @@
+   vector <int> v;
+   Node * front=head;
+        
+        while(head != NULL){
+            v.push_back(head->data);
+            head=head->next;
+        }
+
+        head=front;
+        int s=v.size();
+        
+        for(int i=0;i<s;i++){
+            
+              if(i<s/2) {
+                  int temp=v[i];
+                  v[i]=v[s-i-1]-v[i];
+                  v[s-i-1]=temp;
+              }
+        }
+        
+        for(int i=0;head!=NULL;head=head->next,i++){
+            head->data=v[i];
+        }
+        
+        return front;
