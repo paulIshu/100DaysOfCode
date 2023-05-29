@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+    void rearrange(struct Node *odd)
+    {
+        //add code here
+         if(odd == NULL || odd->next == NULL) return;
+        
+        Node *first = odd;
+        Node *second = odd->next;
+        Node *secondhead = odd->next;
+        
+        while(second != NULL && second->next != NULL) {
+            first->next = first->next->next;
+            second->next = second->next->next;
+            
+            first = first->next;
+            second = second->next;
+        }
+        
+        first->next = NULL;
+        
+        Node *curr = secondhead, *prev = NULL;
+        while(curr != NULL) {
+            Node *next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        secondhead = prev;
+        
+        first->next = secondhead;
+    }
+};
