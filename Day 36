@@ -1,0 +1,33 @@
+Node * mergeKLists(Node *arr[], int K)
+    {
+           // Your code here
+          vector<int> ans;
+        
+        for(int i=0;i<K;i++)
+        {
+            Node*temp=arr[i];
+            while(temp!=NULL){
+                ans.push_back(temp->data);
+                temp=temp->next;
+            }
+        }
+        sort(ans.begin(),ans.end());
+        Node* head=NULL;
+        for(int i=0;i<ans.size();i++){
+             Node* newnode;
+            
+            Node* temp;
+            if(head==NULL){
+       newnode=new Node(ans[i]);
+       head=newnode;
+       temp=head;
+            }
+        else{
+            newnode=new Node(ans[i]);
+            temp->next=newnode;
+            temp=temp->next;
+        }
+        
+        }
+        return head;
+    }
