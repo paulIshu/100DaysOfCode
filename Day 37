@@ -1,0 +1,40 @@
+bool isPresent(Node *root1,Node *root2)
+    {
+        if(root1==0 && root2==0)
+        return true;
+        else if(root1==0 && root2!=0)
+        return false;
+        else if(root2==0 && root1!=0)
+        return false;
+        else if(root1->data!=root2->data)
+        return false;
+        
+        bool left=isPresent(root1->left,root2->left);
+        if(left==false)
+        return false;
+        bool right=isPresent(root1->right,root2->right);
+        
+        return right;
+    }
+    bool isSubTree(Node* T, Node* S) 
+    {
+        // Your code here
+        if(S==0)
+        return true;
+        
+        if(T==0)
+        return false;
+        
+        if(T->data==S->data)
+        {
+            bool t=isPresent(T,S);
+            
+            if(t==true)
+            return true;
+        }
+        
+        bool left=isSubTree(T->left,S);
+        bool right=isSubTree(T->right,S);
+        
+        return left||right;
+    }
