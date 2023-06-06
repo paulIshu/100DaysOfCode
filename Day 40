@@ -1,0 +1,28 @@
+void inorderTraversal(Node*root, vector<Node*>&inorder){
+    if(root == NULL){
+        return;
+    }
+    inorderTraversal(root->left,inorder);
+    inorder.push_back(root);
+    inorderTraversal(root->right, inorder);
+}
+
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+{
+    pre = NULL;
+    suc = NULL;
+    vector<Node*>inorder;
+    inorderTraversal(root,inorder);
+    int n = inorder.size();
+
+//By traversing from the begining we can find the node just smaller //than key & from the last, the node just larger than key.
+    for(int i = 0 ; i< n; i++){
+        if(inorder[i]->key < key) {
+            pre = inorder[i];
+        }
+        if(inorder[n-i-1]->key > key){
+            suc = inorder[n-i-1];
+        }
+    }
+    
+}
