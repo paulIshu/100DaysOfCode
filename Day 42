@@ -1,0 +1,32 @@
+int parentA = -1;
+int parentB = -1;
+int levelA = -1;
+int levelB = -1;
+
+void solve(Node* root, int a, int b, int parent, int level = 0){
+    
+    if(root == NULL)
+        return;
+    if(root->data == a){
+        parentA = parent;
+        levelA = level;
+    }
+    
+    if(root->data == b){
+        parentB = parent;
+        levelB = level;
+    }
+    
+    solve(root->left, a, b, root->data, level+1);
+    solve(root->right, a, b, root->data, level+1);
+}
+
+bool isCousins(Node *root, int a, int b)
+{
+    parentA = parentB = levelA = levelB = -1;
+    solve(root, a, b, root->data, 0);
+   
+    if(levelA != levelB || parentA == parentB)
+        return false;
+    return true;
+}
