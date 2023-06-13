@@ -1,0 +1,23 @@
+#include<unordered_map>
+string maximumFrequency(string s){
+        // Complete the function
+        unordered_map<string,int>map;
+        vector<string>v;
+        int max=0,n=s.length();
+        string ans="",str="";
+        for(int i=0;i<n;i++){
+            if(s[i]==' '){
+                map[str]++;
+                v.push_back(str);
+                str="";
+            }else str.push_back(s[i]);
+        }
+        map[str]++;
+        for(auto i:v){
+            if(map[i]>max){
+                max=map[i];
+                ans=i+" "+to_string(max);
+            }
+        }
+        return ans;
+}
